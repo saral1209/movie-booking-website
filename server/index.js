@@ -13,11 +13,13 @@ import Booking from "./models/Booking.js";
 // Load .env file variables
 dotenv.config();
 
-
-console.log("🔐 Mongo URI loaded:", process.env.MONGO_URI);
-
 // Initialize express app
 const app = express();
+
+// Add root route
+app.get("/", (req, res) => {
+  res.send("🎬 Movie Booking API is running!");
+});
 
 // Middleware setup
 app.use(cors());
