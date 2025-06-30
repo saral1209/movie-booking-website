@@ -11,18 +11,18 @@ function App() {
 
   const userId = "user123";
 
+  const API_BASE = "https://movie-booking-website-japo.onrender.com";
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const moviesRes = await axios.get("http://localhost:5000/movies");
+      const moviesRes = await axios.get(`${API_BASE}/movies`);
       setMovies(moviesRes.data);
 
-      const bookingsRes = await axios.get(
-        `http://localhost:5000/bookings/${userId}`
-      );
+      const bookingsRes = await axios.get(`${API_BASE}/bookings/${userId}`);
       setBookings(bookingsRes.data);
     } catch (err) {
       console.error("❌ Error loading data:", err);
@@ -60,7 +60,7 @@ function App() {
     }
 
     try {
-      await axios.post("http://localhost:5000/book", {
+      await axios.post(`${API_BASE}/book`, {
         userId,
         movieId: bookingMovieId,
         seats: requestedSeats,
@@ -80,7 +80,7 @@ function App() {
 
   const handleDelete = async (bookingId) => {
     try {
-      await axios.delete(`http://localhost:5000/bookings/${bookingId}`);
+      await axios.delete(`${API_BASE}/bookings/${bookingId}`);
       fetchData();
     } catch (err) {
       console.error("❌ Delete failed:", err);
